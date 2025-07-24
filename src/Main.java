@@ -6,10 +6,11 @@ public class Main {
         JFrame frame = new JFrame("Boids Simulator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        int WIDTH = 800;
-        int HEIGHT = 600;
+        int WIDTH = Constants.SCREEN_WIDTH;
+        int HEIGHT = Constants.SCREEN_HEIGHT;
 
         frame.setSize(WIDTH, HEIGHT);
+        frame.add(new BoidPanel());
         frame.add(new BoidPanel());
         frame.setVisible(true);
     }

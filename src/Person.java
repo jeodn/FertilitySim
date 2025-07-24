@@ -1,46 +1,8 @@
 import java.util.List;
 
-public class Boid extends Creature {
-    public Boid(double x, double y) {
+public class Person extends Creature {
+    public Person(double x, double y) {
         super(x, y);
-    }
-
-    // Add methods: applyBehaviors(List<Boid> boids), edges(), etc.
-    // TODO: IMPLEMENT THESE METHODS
-    public Vector align(List<Creature> boids) {
-        Vector avgVelocity = new Vector(0, 0);
-        int count = 0;
-
-        for (Creature other : boids) {
-            if (other != this) {
-                double distance = this.position.distanceTo(other.position);
-                if (distance < PERCEPTION_RADIUS) {
-                    avgVelocity.add(other.velocity);
-                    count++;
-                }
-            }
-        }
-
-        if (count > 0) {
-            avgVelocity.multiply(1.0 / count);  // average velocity
-
-            // Turn into a steering force
-            avgVelocity.normalize();
-            avgVelocity.multiply(MAX_SPEED);
-
-            Vector steering = avgVelocity.copy();
-            steering.subtract(this.velocity);
-
-            // Limit steering force
-            if (steering.magnitude() > MAX_FORCE) {
-                steering.normalize();
-                steering.multiply(MAX_FORCE);
-            }
-
-            return steering;
-        }
-
-        return new Vector(0, 0);  // no neighbors
     }
 
     public Vector cohesion(List<Creature> boids) {
@@ -124,24 +86,6 @@ public class Boid extends Creature {
 
     @Override
     public void applyBehaviors(List<Creature> creatures) {
-        Vector sep = separation(creatures);
-        Vector ali = align(creatures);
-        Vector coh = cohesion(creatures);
-        Vector edgeForce = avoidEdges(WIDTH, HEIGHT);  // Use actual dimensions
 
-
-        ali.multiply(1.4);
-        sep.multiply(0.9);
-        coh.multiply(1.0);
-        edgeForce.multiply(2.0);
-
-        sep.multiply(1.5);
-        ali.multiply(1.0);
-        coh.multiply(1.0);
-
-        applyForce(edgeForce);
-        applyForce(sep);
-        applyForce(ali);
-        applyForce(coh);
     }
 }
