@@ -10,8 +10,8 @@ public class Main {
         int HEIGHT = Constants.SCREEN_HEIGHT;
 
         frame.setSize(WIDTH, HEIGHT);
-        frame.add(new BoidPanel());
-        frame.add(new BoidPanel());
+        frame.add(new PopulationPanel());
+        frame.add(new PopulationPanel());
         frame.setVisible(true);
     }
 }
