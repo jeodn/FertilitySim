@@ -1,4 +1,4 @@
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -13,8 +13,13 @@ public class Main {
 
         PopulationGraphPanel graphPanel = new PopulationGraphPanel();
         PopulationPanel simPanel = new PopulationPanel(graphPanel);  // pass graph in constructor
+        ToolbarPanel toolbarPanel = new ToolbarPanel(simPanel);
+
+        JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.add(toolbarPanel, BorderLayout.NORTH);
 
         frame.setLayout(new BorderLayout());
+        frame.add(topPanel, BorderLayout.NORTH);
         frame.add(simPanel, BorderLayout.CENTER);
         frame.add(graphPanel, BorderLayout.SOUTH);
 

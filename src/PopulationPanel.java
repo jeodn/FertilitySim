@@ -17,9 +17,14 @@ public class PopulationPanel extends JPanel implements ActionListener {
 
     public PopulationPanel(PopulationGraphPanel graphPanel) {
         this.graphPanel = graphPanel;
-        for (int i = 0; i < 100; i++) addToPopulation(Math.random() * Constants.SCREEN_WIDTH, Math.random() * Constants.SCREEN_HEIGHT);
+        for (int i = 0; i < 100; i++) addToPopulation();
         timer = new Timer(16, this); // ~60fps
         timer.start();
+    }
+
+    private void addToPopulation() {
+        // random version
+        addToPopulation(Math.random() * Constants.SCREEN_WIDTH, Math.random() * Constants.SCREEN_HEIGHT);
     }
 
     private void addToPopulation(double x, double y) {
@@ -56,6 +61,21 @@ public class PopulationPanel extends JPanel implements ActionListener {
             }
         }
 
+    }
+
+    public double getBirthRatePerCapita() {
+        return birthRatePerCapita;
+    }
+    public double getDeathRatePerCapita() {
+        return deathRatePerCapita;
+    }
+
+    public void resetSimulation(double newBirthRate, double newDeathRate) {
+        this.birthRatePerCapita = newBirthRate;
+        this.deathRatePerCapita = newDeathRate;
+        this.population.clear();
+        for (int i = 0; i < 100; i++) addToPopulation();
+        graphPanel.reset(); // if needed
     }
 
     @Override

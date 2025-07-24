@@ -19,6 +19,11 @@ public class PopulationGraphPanel extends JPanel {
         repaint();
     }
 
+    public void reset() {
+        populationHistory.clear();
+        repaint();
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
