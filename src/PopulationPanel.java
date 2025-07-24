@@ -8,13 +8,15 @@ import java.util.List;
 import java.util.Random;
 
 public class PopulationPanel extends JPanel implements ActionListener {
+    private final PopulationGraphPanel graphPanel;
     List<Creature> population = new ArrayList<>();
     Timer timer;
     double deathRatePerCapita = 6.9 / 1000; // calculated from per 1000
     double birthRatePerCapita = 4.5 / 1000; // '""'
     double birthRate = 0.78; // per woman
 
-    public PopulationPanel() {
+    public PopulationPanel(PopulationGraphPanel graphPanel) {
+        this.graphPanel = graphPanel;
         for (int i = 0; i < 100; i++) addToPopulation(Math.random() * Constants.SCREEN_WIDTH, Math.random() * Constants.SCREEN_HEIGHT);
         timer = new Timer(16, this); // ~60fps
         timer.start();
@@ -62,6 +64,12 @@ public class PopulationPanel extends JPanel implements ActionListener {
         for (Creature b : population) {
             g.fillOval((int)b.position.x, (int)b.position.y, 5, 5);
         }
+
+        // Draw population count in top-left corner
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("SansSerif", Font.BOLD, 14));
+        g.drawString("Population: " + population.size(), 10, 20);
+
     }
 
     @Override
@@ -71,6 +79,10 @@ public class PopulationPanel extends JPanel implements ActionListener {
             b.update();
         }
         updatePopulation();
+
+        // Notify graph
+        graphPanel.addPopulationData(population.size());
+
         repaint();
     }
 }
