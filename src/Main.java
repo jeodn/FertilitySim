@@ -11,7 +11,6 @@ public class Main {
 
         frame.setSize(WIDTH, HEIGHT);
         frame.add(new PopulationPanel());
-        frame.add(new PopulationPanel());
         frame.setVisible(true);
     }
 }
