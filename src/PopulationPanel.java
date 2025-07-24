@@ -15,13 +15,13 @@ public class PopulationPanel extends JPanel implements ActionListener {
     double birthRate = 0.78; // per woman
 
     public PopulationPanel() {
-        for (int i = 0; i < 100; i++) addToPopulation();
+        for (int i = 0; i < 100; i++) addToPopulation(Math.random() * Constants.SCREEN_WIDTH, Math.random() * Constants.SCREEN_HEIGHT);
         timer = new Timer(16, this); // ~60fps
         timer.start();
     }
 
-    private void addToPopulation() {
-        population.add(new Person(Math.random() * Constants.SCREEN_WIDTH, Math.random() * Constants.SCREEN_HEIGHT));
+    private void addToPopulation(double x, double y) {
+        population.add(new Person(x, y));
     }
 
     private void updatePopulation() {
@@ -36,9 +36,13 @@ public class PopulationPanel extends JPanel implements ActionListener {
         for (int i = 0; i < population.size(); i++) {
             Creature parent = population.get(i);
 
-            // birthrate  probability
+            // birthrate  probability with random spawn
             if (random.nextDouble() < birthRatePerCapita) {
-                addToPopulation();
+                double locationRandomnessConstX = Math.random() * 50;
+                double locationRandomnessConstY = Math.random() * 50;
+                addToPopulation(
+                        locationRandomnessConstX + (double) Constants.SCREEN_WIDTH / 2,
+                        locationRandomnessConstY + (double) Constants.SCREEN_HEIGHT / 2);
             }
         }
 
