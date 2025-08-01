@@ -12,8 +12,10 @@ public class PopulationGraphPanel extends JPanel {
     }
 
     public void addPopulationData(int population) {
+        int MAX_DATA_SIZE = 10000;
+
         populationHistory.add(population);
-        if (populationHistory.size() > 1000) {
+        if (populationHistory.size() > MAX_DATA_SIZE) {
             populationHistory.remove(0); // trim for performance
         }
         repaint();
